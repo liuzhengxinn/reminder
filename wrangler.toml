@@ -1,13 +1,13 @@
-name = "subscription-manager"
+name = "reminder"
 main = "src/index.js"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 [env.production]
-name = "subscription-manager"
+name = "reminder"
 
 [env.staging]
-name = "subscription-manager-staging"
+name = "reminder-staging"
 
 # KV 命名空间配置（默认模板不预设固定 ID，运行 npm run setup 自动生成）
 
@@ -19,6 +19,12 @@ directory = "./public"
 binding = "ASSETS"
 
 # 定时任务配置 - 每小时检查一次（UTC）
+# KV 命名空间配置（自动生成）
+[[kv_namespaces]]
+binding = "SUBSCRIPTIONS_KV"
+id = "346ec65bc6b0456d87afeff77e0307d3"
+preview_id = "aafa26c888164f80923d5dbe93aa4c80"
+
 [triggers]
 crons = ["0 * * * *"]
 
