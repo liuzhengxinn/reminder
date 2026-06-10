@@ -55,7 +55,7 @@ async function handleLogin(request, env) {
       {
         headers: {
           'Content-Type': 'application/json',
-          'Set-Cookie': 'token=' + token + '; HttpOnly; Secure; Path=/; SameSite=Strict; Max-Age=315360000'
+          'Set-Cookie': 'token=' + token + '; HttpOnly; Secure; Path=/; SameSite=Strict; Max-Age=7776000'
         }
       }
     );
