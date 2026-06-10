@@ -55,7 +55,7 @@ async function handleLogin(request, env) {
       {
         headers: {
           'Content-Type': 'application/json',
-          'Set-Cookie': 'token=' + token + '; HttpOnly; Secure; Path=/; SameSite=Strict; Max-Age=86400'
+          'Set-Cookie': 'token=' + token + '; HttpOnly; Secure; Path=/; SameSite=Strict; Max-Age=315360000'
         }
       }
     );
@@ -86,8 +86,7 @@ function handleLogout() {
 async function getUserFromRequest(request, env) {
   const token = getCookieValue(request.headers.get('Cookie'), 'token');
   const config = await getConfig(env);
-  // 绕过登录验证，直接返回有效用户
-  const user = { username: config.ADMIN_USERNAME || 'admin' };
+  const user = token ? await verifyJWT(token, config.JWT_SECRET) : null;
   return { user, config };
 }
 

@@ -14,10 +14,17 @@ async function handleAdminRequest(request, env) {
     console.log('[管理页面] Token存在:', !!token);
 
     const config = await getConfig(env);
-    // const user = token ? await verifyJWT(token, config.JWT_SECRET) : null;
-    const user = { username: config.ADMIN_USERNAME || 'admin' }; // Bypass auth
+    const user = token ? await verifyJWT(token, config.JWT_SECRET) : null;
 
     console.log('[管理页面] 用户验证结果:', !!user);
+
+    if (!user) {
+      console.log('[管理页面] 用户未登录，重定向到登录页面');
+      return new Response('', {
+        status: 302,
+        headers: { 'Location': '/' }
+      });
+    }
 
     if (pathname === '/admin/config') {
       return new Response(configPage, {

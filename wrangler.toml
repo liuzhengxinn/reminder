@@ -19,6 +19,10 @@ directory = "./public"
 binding = "ASSETS"
 
 # 定时任务配置 - 每小时检查一次（UTC）
+
+
+
+
 # KV 命名空间配置（自动生成）
 [[kv_namespaces]]
 binding = "SUBSCRIPTIONS_KV"
